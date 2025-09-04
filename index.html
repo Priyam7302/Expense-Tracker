@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expense tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Add Expenses</h2>
+      <form>
+        <input
+          id="amt"
+          type="number"
+          step="0.01"
+          min="1"
+          placeholder="Expense Amount"
+        />
+
+        <div class="flex-box-one">
+          <input id="det" type="text" placeholder="Expense Detail" />
+
+          <select name="dropDown" id="dropdown-menu">
+            <option value="select">Select</option>
+            <option value="fuel">Fuel</option>
+            <option value="hotel bill">Hotel Bill</option>
+            <option value="services">Services</option>
+            <option value="other expenses">Other Expenses</option>
+          </select>
+        </div>
+        <div class="exp-btn">
+          <button id="addExp">Add Expense</button>
+          <button id="viewExp">View Expense</button>
+        </div>
+      </form>
+
+      <table id="expense-table">
+        <tr>
+          <th>S.NO</th>
+          <th>Date</th>
+          <th>Detail</th>
+          <th>Amount</th>
+        </tr>
+       
+      </table>
+    </div>
+
+    <script src="expense.js"></script>
+  </body>
+</html>

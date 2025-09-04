@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Expense</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+     <div class="wrapper">
+    <div>
+    <h2>Expense Statements</h2>
+    </div>
+    <div>
+    <select name="dropDown" id="dropdown-menu">
+      <option value="select">Select</option>
+      <option value="fuel">Fuel</option>
+      <option value="hotel bill">Hotel Bill</option>
+      <option value="services">Services</option>
+      <option value="other expenses">Other Expenses</option>
+    </select>
+    </div>
+
+    <div>
+    <table id="expense-table">
+      <tr>
+        <th>S.NO</th>
+        <th>Date</th>
+        <th>Detail</th>
+        <th>Amount</th>
+      </tr>
+    </table>
+    </div>
+    </div>
+    <script>
+      let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+      let table = document.querySelector("#expense-table");
+
+      for (let i = 0; i < expenses.length; i++) {
+        let exp = expenses[i];
+
+        let row = document.createElement("tr");
+
+        let sno = document.createElement("td");
+        sno.innerText = exp.SNO;
+
+        let date = document.createElement("td");
+        date.innerText = exp.Date;
+
+        let detail = document.createElement("td");
+        detail.innerText = exp.Detail;
+
+        let amount = document.createElement("td");
+        amount.innerText = exp.Amount;
+
+        row.append(sno, date, detail, amount);
+        table.append(row);
+      }
+
+      let categoryDropdown = document.querySelector("#dropdown-menu");
+
+      // render table
+      function renderTable(data) {
+        table.innerHTML = `
+          <tr>
+            <th>S.NO</th>
+            <th>Date</th>
+            <th>Detail</th>
+            <th>Amount</th>
+          </tr>
+        `;
+
+        for (let i = 0; i < data.length; i++) {
+          let row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${data[i].SNO}</td>
+            <td>${data[i].Date}</td>
+            <td>${data[i].Detail}</td>
+            <td>${data[i].Amount}</td>
+          `;
+          table.append(row);
+        }
+      }
+
+      // show all by default
+      renderTable(expenses);
+
+      // filter on dropdown change
+      categoryDropdown.addEventListener("change", filterCatg);
+
+      function filterCatg() {
+        let cat = categoryDropdown.value;
+        if (cat === "select") {
+          renderTable(expenses);
+        } else {
+          let filtered = [];
+          for (let i = 0; i < expenses.length; i++) {
+            if (expenses[i].Category === cat) {
+              filtered.push(expenses[i]);
+            }
+          }
+          renderTable(filtered);
+        }
+      }
+    </script>
+    <!-- <script src="expense.js"></script> -->
+  </body>
+</html>
