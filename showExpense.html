@@ -31,61 +31,48 @@
           </tr>
         </table>
       </div>
+      <div class="total-amount">
+        <strong>Total:</strong> ₹<span id="show-total">0</span>
+      </div>
     </div>
     <script>
       let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
       let table = document.querySelector("#expense-table");
+      let totalDisplay = document.getElementById("show-total");
 
-      for (let i = 0; i < expenses.length; i++) {
-        let exp = expenses[i];
-
-        let row = document.createElement("tr");
-
-        let sno = document.createElement("td");
-        sno.innerText = exp.SNO;
-
-        let date = document.createElement("td");
-        date.innerText = exp.Date;
-
-        let detail = document.createElement("td");
-        detail.innerText = exp.Detail;
-
-        let amount = document.createElement("td");
-        amount.innerText = exp.Amount;
-
-        row.append(sno, date, detail, amount);
-        table.append(row);
-      }
-
-      let categoryDropdown = document.querySelector("#dropdown-menu");
-
-      // render table
       function renderTable(data) {
         table.innerHTML = `
-          <tr>
-            <th>S.NO</th>
-            <th>Date</th>
-            <th>Detail</th>
-            <th>Amount</th>
-          </tr>
-        `;
+      <tr>
+        <th>S.NO</th>
+        <th>Date</th>
+        <th>Detail</th>
+        <th>Amount</th>
+      </tr>
+    `;
+
+        let total = 0;
 
         for (let i = 0; i < data.length; i++) {
           let row = document.createElement("tr");
           row.innerHTML = `
-            <td>${data[i].SNO}</td>
-            <td>${data[i].Date}</td>
-            <td>${data[i].Detail}</td>
-            <td>${data[i].Amount}</td>
-          `;
+        <td>${i + 1}</td>
+        <td>${data[i].Date}</td>
+        <td>${data[i].Detail}</td>
+        <td>₹${data[i].Amount}</td>
+      `;
           table.append(row);
+
+          total += parseFloat(data[i].Amount);
         }
+
+        totalDisplay.innerText = total.toFixed(2);
       }
 
       // show all by default
       renderTable(expenses);
 
-      // filter on dropdown change
+      let categoryDropdown = document.querySelector("#dropdown-menu");
+
       categoryDropdown.addEventListener("change", filterCatg);
 
       function filterCatg() {
@@ -103,6 +90,7 @@
         }
       }
     </script>
+
     <!-- <script src="expense.js"></script> -->
   </body>
 </html>

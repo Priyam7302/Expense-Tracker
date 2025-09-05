@@ -18,40 +18,35 @@ function addExpense(e) {
     return;
   }
 
-  //date logic
   let d = new Date();
   let today = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 
-  // Get existing data from localStorage (or empty array if none)
   let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
   if (editingIndex !== null) {
-    // update existing expense
     expenses[editingIndex] = {
       SNO: editingIndex + 1,
       Date: today,
       Detail: detValue,
-      Amount: amtValue,
+      Amount: parseFloat(amtValue),
       Category: category,
     };
     editingIndex = null;
   } else {
-    // add new expense
     let obj = {
       SNO: expenses.length + 1,
       Date: today,
       Detail: detValue,
-      Amount: amtValue,
+      Amount: parseFloat(amtValue),
       Category: category,
     };
     expenses.push(obj);
   }
 
-  // Save back to localStorage
   localStorage.setItem("expenses", JSON.stringify(expenses));
 
-  // refresh table
   renderTable(expenses);
+  updateTotal(expenses); //  update total
 
   document.querySelector("form").reset();
 }
@@ -61,7 +56,6 @@ function showExpense() {
   window.open("showExpense.html", "_blank");
 }
 
-// render table with action buttons
 function renderTable(expenses) {
   expenseTable.innerHTML = `
     <tr>
@@ -80,7 +74,7 @@ function renderTable(expenses) {
       <td>${index + 1}</td>
       <td>${exp.Date}</td>
       <td>${exp.Detail}</td>
-      <td>${exp.Amount}</td>
+      <td>₹${exp.Amount}</td>
       <td>
         <button class="edit-btn" data-index="${index}">Edit</button>
         <button class="delete-btn" data-index="${index}">Delete</button>
@@ -90,7 +84,6 @@ function renderTable(expenses) {
     expenseTable.append(row);
   });
 
-  // add event listeners for buttons
   document
     .querySelectorAll(".delete-btn")
     .forEach((btn) => btn.addEventListener("click", deleteExpense));
@@ -107,6 +100,7 @@ function deleteExpense(e) {
     expenses.splice(index, 1);
     localStorage.setItem("expenses", JSON.stringify(expenses));
     renderTable(expenses);
+    updateTotal(expenses); // update total after delete
   }
 }
 
@@ -119,11 +113,18 @@ function editExpense(e) {
   document.querySelector("#det").value = exp.Detail;
   document.querySelector("#dropdown-menu").value = exp.Category;
 
-  editingIndex = index; // mark this expense for editing
+  editingIndex = index;
 }
 
-// load saved expenses on page load
+// Function to update total
+function updateTotal(expenses) {
+  let total = expenses.reduce((sum, exp) => sum + exp.Amount, 0);
+  document.getElementById("total-amount").innerText = total.toFixed(2);
+}
+
+// load on page start
 window.onload = function () {
   let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
   renderTable(expenses);
+  updateTotal(expenses); //  load total initially
 };
