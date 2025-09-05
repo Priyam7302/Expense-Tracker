@@ -4,33 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Show Expense</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-     <div class="wrapper">
-    <div>
-    <h2>Expense Statements</h2>
-    </div>
-    <div>
-    <select name="dropDown" id="dropdown-menu">
-      <option value="select">Select</option>
-      <option value="fuel">Fuel</option>
-      <option value="hotel bill">Hotel Bill</option>
-      <option value="services">Services</option>
-      <option value="other expenses">Other Expenses</option>
-    </select>
-    </div>
+    <div class="wrapper">
+      <div>
+        <h2>Expense Statements</h2>
+      </div>
+      <div>
+        <select name="dropDown" id="dropdown-menu">
+          <option value="select">Select</option>
+          <option value="fuel">Fuel</option>
+          <option value="hotel bill">Hotel Bill</option>
+          <option value="services">Services</option>
+          <option value="other expenses">Other Expenses</option>
+        </select>
+      </div>
 
-    <div>
-    <table id="expense-table">
-      <tr>
-        <th>S.NO</th>
-        <th>Date</th>
-        <th>Detail</th>
-        <th>Amount</th>
-      </tr>
-    </table>
-    </div>
+      <div>
+        <table id="expense-table">
+          <tr>
+            <th>S.NO</th>
+            <th>Date</th>
+            <th>Detail</th>
+            <th>Amount</th>
+          </tr>
+        </table>
+      </div>
     </div>
     <script>
       let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
