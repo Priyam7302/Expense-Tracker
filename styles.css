@@ -1,53 +1,60 @@
-/* Reset some defaults */
+/* Reset defaults */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background: #f5f7fa;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url("images/john-vid-DH1dABIkjYo-unsplash.jpg") no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
+  animation: fadeIn 1s ease;
 }
 
 /* Main wrapper */
 .wrapper {
-  background: #ffffff;
-  width: 700px;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  /* background: rgba(255, 255, 255, 0.95); */
+  width: 750px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.8s ease;
 }
 
 /* Heading */
 h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 25px;
+  /* color: #333; */
+  color: #eee;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 /* Dropdown filter */
 #dropdown-menu {
   display: block;
-  margin: 0 auto 20px;  /* center + spacing below */
-  width: 220px;
-  padding: 10px 12px;
-  border-radius: 6px;
+  margin: 0 auto 20px;
+  width: 250px;
+  padding: 12px;
+  border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 15px;
   background: #fff;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.3s;
 }
 
 #dropdown-menu:focus {
   border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+  transform: scale(1.05);
 }
 
 /* Expense Table */
@@ -55,15 +62,15 @@ table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 th,
 td {
-  padding: 12px;
+  padding: 14px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
 th {
@@ -78,4 +85,27 @@ tr:nth-child(even) {
 
 tr:hover {
   background: #f1f7ff;
+  transform: scale(1.01);
+  transition: 0.3s;
+}
+
+/* Total Amount */
+.total-amount {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
+  /* color: #222; */
+  color: #ddd;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

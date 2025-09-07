@@ -1,33 +1,39 @@
-/* Reset some defaults */
+/* Reset defaults */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background: #f5f7fa;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/images/john-vid-DH1dABIkjYo-unsplash.jpg") no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
+  animation: fadeIn 1s ease-in-out;
 }
 
 /* Container */
 .container {
-  background: #ffffff;
-  width: 600px;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  /* background: rgba(255, 255, 255, 0.95); */
+  width: 650px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.8s ease;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  /* color: #333; */
+  color: #eee;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 /* Form */
@@ -40,18 +46,19 @@ form {
 input,
 select {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
   font-size: 15px;
   outline: none;
-  transition: 0.2s ease;
+  transition: 0.3s;
 }
 
 input:focus,
 select:focus {
   border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+  transform: scale(1.02);
 }
 
 .flex-box-one {
@@ -66,19 +73,30 @@ select:focus {
 
 button {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border: none;
-  border-radius: 8px;
-  background: #4a90e2;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
   color: white;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.3s;
+}
+
+button i {
+  margin-right: 6px;
 }
 
 button:hover {
-  background: #357abd;
+  background: linear-gradient(135deg, #357abd, #24567a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+#logoutBtn {
+  background: linear-gradient(135deg, #ff6b6b, #d64545);
+  margin-bottom: 15px;
 }
 
 /* Table */
@@ -86,18 +104,22 @@ table {
   width: 100%;
   margin-top: 20px;
   border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 th,
 td {
-  padding: 12px;
+  padding: 14px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
 th {
   background: #4a90e2;
   color: white;
+  font-size: 16px;
+  letter-spacing: 0.5px;
 }
 
 tr:nth-child(even) {
@@ -106,9 +128,36 @@ tr:nth-child(even) {
 
 tr:hover {
   background: #f1f7ff;
+  transform: scale(1.01);
+  transition: 0.3s;
 }
 
-/* Dropdown on showExpense.html */
-#dropdown-menu {
-  margin: 15px 0;
+.total-amount {
+  margin-top: 20px;
+  text-align: right;
+  font-size: 18px;
+  font-weight: 700;
+  /* color: #333; */
+  color: #ddd;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
