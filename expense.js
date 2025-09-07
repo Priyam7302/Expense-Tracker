@@ -84,17 +84,24 @@ function renderTable(expenses) {
     expenseTable.append(row);
   });
 
-  document
-    .querySelectorAll(".delete-btn")
-    .forEach((btn) => btn.addEventListener("click", deleteExpense));
+  // delete buttons
+  document.querySelectorAll(".delete-btn").forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      let index = e.target.getAttribute("data-index"); // instead of dataset
+      deleteExpense(index);
+    })
+  );
 
-  document
-    .querySelectorAll(".edit-btn")
-    .forEach((btn) => btn.addEventListener("click", editExpense));
+  // edit buttons
+  document.querySelectorAll(".edit-btn").forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      let index = e.target.getAttribute("data-index");
+      editExpense(index);
+    })
+  );
 }
 
-function deleteExpense(e) {
-  let index = e.target.dataset.index;
+function deleteExpense(index) {
   if (confirm("Are you sure you want to delete this expense?")) {
     let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
     expenses.splice(index, 1);
@@ -104,8 +111,7 @@ function deleteExpense(e) {
   }
 }
 
-function editExpense(e) {
-  let index = e.target.dataset.index;
+function editExpense(index) {
   let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
   let exp = expenses[index];
 
@@ -128,3 +134,12 @@ window.onload = function () {
   renderTable(expenses);
   updateTotal(expenses); //  load total initially
 };
+
+//auth logic
+let logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  });
+}

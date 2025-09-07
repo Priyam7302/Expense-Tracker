@@ -7,8 +7,18 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- adding auth logic -->
+    <script>
+      if (!localStorage.getItem("loggedInUser")) {
+        window.location.href = "login.html";
+      }
+    </script>
+
     <div class="container">
+      <!-- adding logout btn -->
+      <button id="logoutBtn">Logout</button>
       <h2>Add Expenses</h2>
+
       <form>
         <input
           id="amt"
@@ -22,7 +32,7 @@
           <input id="det" type="text" placeholder="Expense Detail" />
 
           <select name="dropDown" id="dropdown-menu">
-            <option value="select">Select</option>
+            <option value="select">All</option>
             <option value="fuel">Fuel</option>
             <option value="hotel bill">Hotel Bill</option>
             <option value="services">Services</option>
